@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyRecyclerView</string>
+    <string name="menu_title_list">List</string>
+    <string name="menu_title_grid">Grid</string>
+    <string name="menu_title_with_cardview">with CardView</string>
+    <string name="favorite">Favorite</string>
+    <string name="share">Share</string>
+</resources>
