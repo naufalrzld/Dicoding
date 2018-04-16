@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MovieCatalogue</string>
+    <string name="btn_cari">Cari</string>
+    <string name="tv_movie_title">Movie Title:</string>
+    <string name="tv_genres">Genres:</string>
+    <string name="tv_overview">Overview:</string>
+    <string name="tvrelease_date">Release Date:</string>
+</resources>
