@@ -1,94 +1,59 @@
 package com.naufalrzld.moviecatalogue;
 
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
+import android.provider.Settings;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.naufalrzld.moviecatalogue.Adapter.MovieAdapter;
-import com.naufalrzld.moviecatalogue.Model.MovieModel;
+import com.naufalrzld.moviecatalogue.Adapter.ViewPagerAdapter;
+import com.naufalrzld.moviecatalogue.Fragment.NowPlayingFragment;
+import com.naufalrzld.moviecatalogue.Fragment.SearchFragment;
+import com.naufalrzld.moviecatalogue.Fragment.UpcomingFragment;
 
-import java.util.ArrayList;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        LoaderManager.LoaderCallbacks<ArrayList<MovieModel>>, AdapterView.OnItemClickListener {
-    private EditText etSearch;
-    private Button btnSearch;
-    private ListView lvMovie;
-
-    private ProgressBar progressBar;
-
-    private MovieAdapter adapter;
-
-    private static final String EXTRA_MOVIE_NAME = "MOVIE_NAME";
+public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.container)
+    ViewPager container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        etSearch = (EditText) findViewById(R.id.et_search);
-        btnSearch = (Button) findViewById(R.id.btn_search);
-        lvMovie = (ListView) findViewById(R.id.lv_movie);
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        setViewPager(container);
+        tabLayout.setupWithViewPager(container);
+    }
 
-        adapter = new MovieAdapter(this);
-        adapter.notifyDataSetChanged();
-        lvMovie.setAdapter(adapter);
-        lvMovie.setOnItemClickListener(this);
-
-        btnSearch.setOnClickListener(this);
+    private void setViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new NowPlayingFragment(), getResources().getString(R.string.fragment_now_playing));
+        adapter.addFragment(new UpcomingFragment(), getResources().getString(R.string.fragment_upcoming));
+        adapter.addFragment(new SearchFragment(), getResources().getString(R.string.fragment_search));
+        viewPager.setAdapter(adapter);
     }
 
     @Override
-    public void onClick(View view) {
-        String movieName = etSearch.getText().toString();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        if (TextUtils.isEmpty(movieName)) {
-            return;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_setting){
+            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(mIntent);
         }
-
-        Bundle bundle = new Bundle();
-        bundle.putString(EXTRA_MOVIE_NAME, movieName);
-        getLoaderManager().restartLoader(0, bundle, MainActivity.this);
-    }
-
-    @Override
-    public Loader<ArrayList<MovieModel>> onCreateLoader(int id, Bundle bundle) {
-        progressBar.setVisibility(View.VISIBLE);
-        lvMovie.setVisibility(View.GONE);
-        String movieName = "";
-        if (bundle != null) {
-            movieName = bundle.getString(EXTRA_MOVIE_NAME);
-        }
-        return new MyAsyncTaskLoader(this, movieName);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<ArrayList<MovieModel>> loader, ArrayList<MovieModel> movieModels) {
-        adapter.setData(movieModels);
-        progressBar.setVisibility(View.GONE);
-        lvMovie.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<ArrayList<MovieModel>> loader) {
-        adapter.setData(null);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        MovieModel movieModel = adapter.getItem(position);
-        Intent i = new Intent(this, DetailMovieActivity.class);
-        i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movieModel);
-        startActivity(i);
+        return super.onOptionsItemSelected(item);
     }
 }

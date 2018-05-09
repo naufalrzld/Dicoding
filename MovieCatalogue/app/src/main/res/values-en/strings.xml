@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MovieCatalogue</string>
+    <string name="btn_cari">Search</string>
+    <string name="tv_movie_title">Movie Title:</string>
+    <string name="tv_overview">Overview:</string>
+    <string name="tvrelease_date">Release Date:</string>
+    <string name="btn_title_detail">Detail</string>
+    <string name="btn_title_share">Share</string>
+    <string name="fragment_now_playing">NOW PLAYING</string>
+    <string name="fragment_upcoming">UPCOMING</string>
+    <string name="fragment_search">SEARCH</string>
+    <string name="share">SHARE</string>
+    <string name="menu_title_setting">Change Language Settings</string>
+</resources>

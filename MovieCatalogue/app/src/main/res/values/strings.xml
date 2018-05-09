@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">MovieCatalogue</string>
     <string name="btn_cari">Cari</string>
-    <string name="tv_movie_title">Movie Title:</string>
-    <string name="tv_genres">Genres:</string>
-    <string name="tv_overview">Overview:</string>
-    <string name="tvrelease_date">Release Date:</string>
+    <string name="tv_movie_title">Judul Film:</string>
+    <string name="tv_overview">Sinopsis:</string>
+    <string name="tvrelease_date">Tanggal Rilis:</string>
+    <string name="btn_title_detail">Rincian</string>
+    <string name="btn_title_share">Bagikan</string>
+    <string name="fragment_now_playing">SEDANG DIMAINKAN</string>
+    <string name="fragment_upcoming">AKAN DATANG</string>
+    <string name="fragment_search">CARI</string>
+    <string name="share">BAGIKAN</string>
+    <string name="menu_title_setting">Rubah Pengaturan Bahasa</string>
 </resources>

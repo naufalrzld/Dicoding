@@ -1,9 +1,7 @@
 package com.naufalrzld.moviecatalogue;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
+import android.support.v4.content.AsyncTaskLoader;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
@@ -27,12 +25,14 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieModel>> {
     private boolean mHasResult = false;
 
     private String movieName;
+    private String type;
 
-    public MyAsyncTaskLoader(Context context, String movieName) {
+    public MyAsyncTaskLoader(Context context, String movieName, String type) {
         super(context);
 
         onContentChanged();
         this.movieName = movieName;
+        this.type = type;
     }
 
     @Override
@@ -46,9 +46,9 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieModel>> {
 
     @Override
     public void deliverResult(ArrayList<MovieModel> data) {
-        super.deliverResult(data);
         movieList = data;
         mHasResult = true;
+        super.deliverResult(data);
     }
 
     @Override
@@ -66,8 +66,14 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieModel>> {
         SyncHttpClient client = new SyncHttpClient();
 
         final ArrayList<MovieModel> movieItems = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/search/movie?api_key=" +
-                API_KEY + "&language=en-US&query=" + movieName;
+        String url;
+        if (type.equals("search")) {
+            url = "https://api.themoviedb.org/3/search/movie?api_key=" +
+                    BuildConfig.API_KEY + "&language=en-US&query=" + movieName;
+        } else {
+            url = "https://api.themoviedb.org/3/movie/" + type + "?api_key=" +
+                    BuildConfig.API_KEY + "&language=en-US";
+        }
 
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -95,7 +101,7 @@ public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieModel>> {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+
             }
         });
 
