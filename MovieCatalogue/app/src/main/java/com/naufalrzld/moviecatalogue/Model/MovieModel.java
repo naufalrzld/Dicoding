@@ -1,9 +1,21 @@
-package com.naufalrzld.moviecatalogue.Model;
+package com.naufalrzld.moviecatalogue.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.json.JSONObject;
+
+import static android.provider.BaseColumns._ID;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.FavouriteColumns.MOVIE_ID;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.FavouriteColumns.OVERVIEW;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.FavouriteColumns.POPULARITY;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.FavouriteColumns.POSTER_PATH;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.FavouriteColumns.RELEASE_DATE;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.FavouriteColumns.TITLE;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.getColumnDouble;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.getColumnInt;
+import static com.naufalrzld.moviecatalogue.db.DatabaseContract.getColumnString;
 
 /**
  * Created by Naufal on 29/03/2018.
@@ -15,6 +27,7 @@ public class MovieModel implements Parcelable {
     private String description;
     private String posterPath;
     private String releaseDate;
+    private Double popularity;
 
     public MovieModel(JSONObject jsonObject) {
         try {
@@ -23,15 +36,26 @@ public class MovieModel implements Parcelable {
             String description = jsonObject.getString("overview");
             String posterPath = jsonObject.getString("poster_path");
             String releaseDate = jsonObject.getString("release_date");
+            Double popularity = jsonObject.getDouble("popularity");
 
             this.movieID = id;
             this.title = title;
             this.description = description;
             this.posterPath = posterPath;
             this.releaseDate = releaseDate;
+            this.popularity = popularity;
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public MovieModel(Cursor cursor) {
+        this.movieID = getColumnInt(cursor, MOVIE_ID);
+        this.title = getColumnString(cursor, TITLE);
+        this.description = getColumnString(cursor, OVERVIEW);
+        this.posterPath = getColumnString(cursor, POSTER_PATH);
+        this.releaseDate = getColumnString(cursor, RELEASE_DATE);
+        this.popularity = getColumnDouble(cursor, POPULARITY);
     }
 
     public int getMovieID() {
@@ -74,6 +98,14 @@ public class MovieModel implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
+    public Double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Double popularity) {
+        this.popularity = popularity;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -86,6 +118,7 @@ public class MovieModel implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.posterPath);
         dest.writeString(this.releaseDate);
+        dest.writeDouble(this.popularity);
     }
 
     protected MovieModel(Parcel in) {
@@ -94,6 +127,7 @@ public class MovieModel implements Parcelable {
         this.description = in.readString();
         this.posterPath = in.readString();
         this.releaseDate = in.readString();
+        this.popularity = in.readDouble();
     }
 
     public static final Parcelable.Creator<MovieModel> CREATOR = new Parcelable.Creator<MovieModel>() {

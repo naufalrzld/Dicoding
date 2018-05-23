@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.naufalrzld.moviecatalogue">
 
+    <permission android:name="com.naufalrzld.moviecatalogue.READ_DATABASE" android:protectionLevel="normal" />
+    <permission android:name="com.naufalrzld.moviecatalogue.WRITE_DATABASE" android:protectionLevel="normal" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -18,7 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailMovieActivity"></activity>
+        <activity android:name=".DetailMovieActivity"/>
+        <provider
+            android:authorities="com.naufalrzld.moviecatalogue"
+            android:name=".provider.MovieProvider"
+            android:exported="true"
+            android:readPermission="com.naufalrzld.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.naufalrzld.moviecatalogue.WRITE_DATABASE" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.naufalrzld.moviecatalogue.Fragment;
+package com.naufalrzld.moviecatalogue.fragment;
 
 
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.naufalrzld.moviecatalogue.Adapter.MovieAdapter;
-import com.naufalrzld.moviecatalogue.Model.MovieModel;
+import com.naufalrzld.moviecatalogue.adapter.MovieAdapter;
+import com.naufalrzld.moviecatalogue.model.MovieModel;
 import com.naufalrzld.moviecatalogue.MyAsyncTaskLoader;
 import com.naufalrzld.moviecatalogue.R;
 
@@ -55,7 +55,7 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, v);
 
-        adapter = new MovieAdapter(getContext());
+        adapter = new MovieAdapter(getContext(), false);
         rvMovie.setHasFixedSize(true);
         rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovie.setAdapter(adapter);

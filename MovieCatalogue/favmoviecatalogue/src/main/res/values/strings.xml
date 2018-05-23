@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FavMovieCatalogue</string>
+    <string name="btn_cari">Cari</string>
+    <string name="tv_movie_title">Judul Film:</string>
+    <string name="tv_overview">Sinopsis</string>
+    <string name="tvrelease_date">Tanggal Rilis:</string>
+    <string name="btn_title_detail">Rincian</string>
+    <string name="btn_title_share">Bagikan</string>
+    <string name="fragment_now_playing">SEDANG DIMAINKAN</string>
+    <string name="fragment_upcoming">AKAN DATANG</string>
+    <string name="fragment_search">CARI</string>
+    <string name="fragment_favourite">Favorit</string>
+    <string name="share">BAGIKAN</string>
+    <string name="menu_title_setting">Rubah Pengaturan Bahasa</string>
+    <string name="popularity">Popularitas</string>
+    <string name="home">Beranda</string>
+    <string name="search">Cari</string>
+    <string name="favourite">Favorit</string>
+    <string name="preferences">Pilihan</string>
+    <string name="setting">Pengaturan</string>
+    <string name="detail_activity_title">Rincian</string>
+    <string name="upcoming">Akan Datang</string>
+</resources>

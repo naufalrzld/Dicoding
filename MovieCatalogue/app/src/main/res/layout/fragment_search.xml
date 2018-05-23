@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".Fragment.SearchFragment">
+    tools:context=".fragment.SearchFragment">
 
     <LinearLayout
         android:id="@+id/lyt_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <EditText
             android:id="@+id/et_search"
@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lyt_search"
-        android:visibility="gone"/>
+        android:visibility="visible"
+        tools:listitem="@layout/movie_item"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

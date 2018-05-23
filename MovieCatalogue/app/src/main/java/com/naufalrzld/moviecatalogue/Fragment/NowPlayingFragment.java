@@ -1,4 +1,4 @@
-package com.naufalrzld.moviecatalogue.Fragment;
+package com.naufalrzld.moviecatalogue.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.naufalrzld.moviecatalogue.Adapter.MovieAdapter;
-import com.naufalrzld.moviecatalogue.Model.MovieModel;
+import com.naufalrzld.moviecatalogue.adapter.MovieAdapter;
+import com.naufalrzld.moviecatalogue.model.MovieModel;
 import com.naufalrzld.moviecatalogue.MyAsyncTaskLoader;
 import com.naufalrzld.moviecatalogue.R;
 
@@ -47,7 +47,7 @@ public class NowPlayingFragment extends Fragment implements LoaderManager.Loader
         View v = inflater.inflate(R.layout.fragment_now_playing, container, false);
         ButterKnife.bind(this, v);
 
-        adapter = new MovieAdapter(getContext());
+        adapter = new MovieAdapter(getContext(), false);
         rvMovie.setHasFixedSize(true);
         rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovie.setAdapter(adapter);

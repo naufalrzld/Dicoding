@@ -5,7 +5,7 @@ import android.support.v4.content.AsyncTaskLoader;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
-import com.naufalrzld.moviecatalogue.Model.MovieModel;
+import com.naufalrzld.moviecatalogue.model.MovieModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,8 +19,6 @@ import cz.msebera.android.httpclient.Header;
  */
 
 public class MyAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieModel>> {
-    private static final String API_KEY = "1157aaf4cd28105165a7f5f43b853aae";
-
     private ArrayList<MovieModel> movieList;
     private boolean mHasResult = false;
 

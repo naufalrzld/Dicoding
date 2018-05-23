@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".Fragment.UpcomingFragment">
+    tools:context=".fragment.UpcomingFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="visible"
+        tools:listitem="@layout/movie_item"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
